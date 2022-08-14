@@ -21,6 +21,8 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(),
                 _Overview(),
+                _Overview(),
+                _Overview(),
               ],
             ),
           ),
@@ -35,7 +37,7 @@ class _CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       backgroundColor: Colors.indigo,
-      expandedHeight: 200,
+      expandedHeight: 190,
       floating: false,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
@@ -53,6 +55,7 @@ class _CustomAppBar extends StatelessWidget {
         background: const FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
           image: NetworkImage('https://picsum.photos/500/300'),
+          fit: BoxFit.cover,
         ),
       ),
     );
