@@ -20,6 +20,7 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 _PosterAndTitle(),
+                _Overview(),
               ],
             ),
           ),
@@ -42,7 +43,7 @@ class _CustomAppBar extends StatelessWidget {
         titlePadding: const EdgeInsets.all(0),
         title: Container(
           alignment: Alignment.bottomCenter,
-          color: Colors.black12,
+          color: Colors.black26,
           width: double.infinity,
           child: const Text(
             'movie.title',
@@ -61,6 +62,8 @@ class _CustomAppBar extends StatelessWidget {
 class _PosterAndTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Container(
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -76,23 +79,57 @@ class _PosterAndTitle extends StatelessWidget {
           ),
           const SizedBox(width: 20),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //Centralizar los headlines
               Text(
                 'movie.title',
-                style: Theme.of(context).textTheme.headline5,
+                style: textTheme.headline5,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
               ),
               Text(
                 'movie.originalTitle',
-                style: Theme.of(context).textTheme.subtitle1,
+                style: textTheme.subtitle1,
                 overflow: TextOverflow.ellipsis,
-                maxLines: 2,
+                maxLines: 1,
               ),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.star_outline,
+                    size: 15,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'movie.voteAverage',
+                    style: textTheme.caption,
+                  )
+                ],
+              )
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 30,
+        vertical: 10,
+      ),
+      child: Text(
+        'Ea consequat amet nulla qui veniam do magna non dolor nostrud ex in commodo fugiat. Cupidatat esse non mollit reprehenderit dolor nulla eu quis exercitation aute laboris aliquip. Aliquip proident et occaecat velit laborum enim enim eu culpa laboris reprehenderit incididunt.',
+        textAlign: TextAlign.justify,
+        style: Theme.of(context).textTheme.subtitle1,
       ),
     );
   }
