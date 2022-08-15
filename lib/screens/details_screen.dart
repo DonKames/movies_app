@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class DetailsScreen extends StatelessWidget {
                 _Overview(),
                 _Overview(),
                 _Overview(),
+                _Overview(),
+                const CastingCards(),
               ],
             ),
           ),
@@ -46,6 +49,7 @@ class _CustomAppBar extends StatelessWidget {
         title: Container(
           alignment: Alignment.bottomCenter,
           color: Colors.black26,
+          padding: const EdgeInsets.only(bottom: 10),
           width: double.infinity,
           child: const Text(
             'movie.title',
