@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/models/models.dart';
 
 class MovieSlider extends StatelessWidget {
+  final List<Movie> movies;
+  final String? title;
+
+  const MovieSlider({super.key, required this.movies, this.title});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,19 +15,22 @@ class MovieSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              'Populares',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                title!,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
           const SizedBox(height: 5),
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 20,
-              itemBuilder: (BuildContext _, int index) => _MoviePoster(),
+              itemCount: movies.length,
+              itemBuilder: (BuildContext _, int index) =>
+                  _MoviePoster(movies[index]),
             ),
           ),
         ],
@@ -31,6 +40,10 @@ class MovieSlider extends StatelessWidget {
 }
 
 class _MoviePoster extends StatelessWidget {
+  final Movie movie;
+
+  const _MoviePoster(this.movie);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,22 +58,22 @@ class _MoviePoster extends StatelessWidget {
               'details',
               arguments: 'movie-instance',
             ),
-            child: const ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
               child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
-                image: NetworkImage('https://picsum.photos/300/400'),
+                placeholder: const AssetImage('assets/no-image.jpg'),
+                image: NetworkImage(movie.fullPosterImg),
                 width: 130,
                 height: 190,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Text(
-            'Star Wars: el retorno de tu vieja',
+            movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
