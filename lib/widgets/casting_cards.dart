@@ -31,7 +31,7 @@ class CastingCards extends StatelessWidget {
           height: 190,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
-            itemCount: 10,
+            itemCount: cast.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext _, int index) => _CastCard(cast[index]),
           ),
