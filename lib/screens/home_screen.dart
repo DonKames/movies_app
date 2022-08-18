@@ -17,7 +17,11 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Películas en Cines'),
         elevation: 0,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search_outlined))
+          IconButton(
+            onPressed: () =>
+                showSearch(context: context, delegate: SearchDelegate()),
+            icon: const Icon(Icons.search_outlined),
+          )
         ],
       ),
       body: SingleChildScrollView(
@@ -28,9 +32,12 @@ class HomeScreen extends StatelessWidget {
 
             //Slider de Películas
             MovieSlider(
-                movies: moviesProvider.popularMovies, title: 'Populares'),
-            MovieSlider(movies: moviesProvider.popularMovies),
-            MovieSlider(movies: moviesProvider.popularMovies, title: 'Testing'),
+              movies: moviesProvider.popularMovies,
+              title: 'Populares',
+              onNextPage: () => moviesProvider.getPopularMovies(),
+            ),
+            //MovieSlider(movies: moviesProvider.popularMovies),
+            //MovieSlider(movies: moviesProvider.popularMovies, title: 'Testing'),
           ],
         ),
       ),

@@ -4,8 +4,14 @@ import 'package:movies_app/models/models.dart';
 class MovieSlider extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
+  final Function onNextPage;
 
-  const MovieSlider({super.key, required this.movies, this.title});
+  const MovieSlider({
+    super.key,
+    required this.movies,
+    this.title,
+    required this.onNextPage,
+  });
 
   @override
   State<MovieSlider> createState() => _MovieSliderState();
@@ -16,11 +22,16 @@ class _MovieSliderState extends State<MovieSlider> {
 
   @override
   void initState() {
+    //final ScrollPosition scrollPosition = scrollController.position;
     super.initState();
 
     scrollController.addListener(() {
-      print(scrollController.position.pixels);
-      print(scrollController.position.maxScrollExtent);
+      if (scrollController.position.pixels + 500 >=
+          scrollController.position.maxScrollExtent) {
+        //TODO: LLamar Provider
+        print('Se alcanzara el limite');
+        widget.onNextPage();
+      }
     });
   }
 
@@ -79,7 +90,7 @@ class _MoviePoster extends StatelessWidget {
             onTap: () => Navigator.pushNamed(
               context,
               'details',
-              arguments: 'movie-instance',
+              arguments: movie,
             ),
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
